@@ -26,11 +26,11 @@ let electricityAccount = new Schema(
       type: String,
     },
 
-    dateTime: {
+    cloudinary_id: {
       type: String,
     },
 
-    billUpload: {
+    avatar: {
       type: String,
     },
 
