@@ -12,6 +12,8 @@ const userArea = require("../Models/userArea");
 var nodemailer = require("nodemailer");
 const areaShedule = require("../Models/areaShedule");
 const electricityAccount = require("../Models/electricityAccount");
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
@@ -20,6 +22,8 @@ var transporter = nodemailer.createTransport({
     pass: "bfttjpazovxroosz",
   },
 });
+
+
 
 router.route("/register").post(async (req, res) => {
   try {
@@ -308,7 +312,7 @@ router.route("/reg/acc").post(auth, async (req, res) => {
     const { AreaOffice, accountNo,mobileNo,billUpload } = req.body;
     const user = await customer.findById({ _id: req.user });
 
-    if (!AreaOffice && !AccountNo)
+    if (!AreaOffice && !accountNo)
       return res.status(400).json({ msg: `please enter valid details ` });
 
     const date = new Date().toLocaleString("en-US", {
@@ -339,6 +343,30 @@ router.route("/reg/acc").post(auth, async (req, res) => {
 })
 
 
+router.post("/at", upload.single('image'),auth, async (req, res) => {
+  try {
+    // Upload image to cloudinary
+    const { AreaOffice, accountNo,mobileNo } = req.body;
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    const checkAcc = await electricityAccount.findOne({ accountNo: accountNo });
+ if(checkAcc)   return res.status(400).json({ msg: `already exsist ` });
+    
+    let saveAcc = new electricityAccount({
+      AreaOffice,
+      accountNo,
+      mobileNo,
+      customerId: req.user,
+      avatar: result.secure_url,
+      cloudinary_id: result.public_id,
+    });
+    
+  let regiserAcc =  await saveAcc.save();
+    res.json(regiserAcc);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 
