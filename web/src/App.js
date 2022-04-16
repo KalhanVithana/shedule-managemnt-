@@ -1,5 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
+
+import 'antd/dist/antd.css';
+import "./assets/SCSS/index.scss";
 import AppRoutes from './routes';
 
 function App() {
