@@ -1,0 +1,21 @@
+.ant-input {
+    &:focus,
+    &:active,
+    &:hover {
+      box-shadow: none;
+      border-color: none;
+    }
+  }
+
+  .ant-btn {
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: transparent;
+      box-shadow: 0;
+    }
+  }
+  a.ant-btn {
+    line-height: 30px;
+    padding-top: 4px !important;
+  }
