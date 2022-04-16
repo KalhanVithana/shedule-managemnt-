@@ -1,13 +1,17 @@
 
 import 'antd/dist/antd.css';
 import "./assets/SCSS/index.scss";
+import store from './redux/store';
 import AppRoutes from './routes';
-
+import {Provider} from 'react-redux'
 function App() {
   return (
-    <div className="App">
+    <>
+     <Provider store = {store}>
      <AppRoutes/>
-    </div>
+     </Provider>
+   
+    </>
   );
 }
 

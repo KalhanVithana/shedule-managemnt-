@@ -21,7 +21,7 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-router.route("/reg").post(async (req, res) => {
+router.route("/register").post(async (req, res) => {
   try {
     const { firstName, lastName, email, password, checkpassword } = req.body;
 
