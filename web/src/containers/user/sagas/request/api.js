@@ -1,6 +1,6 @@
 import axios from "axios";
 export const getAPIkey = (data)=>{
-
+    
    localStorage.setItem('x-auth',data)
 }
 
