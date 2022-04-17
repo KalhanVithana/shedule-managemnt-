@@ -8,9 +8,15 @@
   }
 
   .ant-btn {
+   width: 290px;
+   height: 40px;
+   border-radius: 10px;
+   box-shadow: none;
     &:focus,
     &:active,
     &:hover {
+      
+      color: $black;
       border-color: transparent;
       box-shadow: 0;
     }
@@ -19,3 +25,53 @@
     line-height: 30px;
     padding-top: 4px !important;
   }
+ 
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    padding-top: 4px;
+    width: 100%;
+    height: 40px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:focus,
+    &:active {
+      border-color: none;
+      box-shadow: none;
+    }
+  }
+
+
+    .ant-select {
+      .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input).ant-select-selector {
+        border-color: none;
+        box-shadow: none;
+      }
+  
+    }
+    .ant-select-selector {
+      display: flex;
+      flex-direction: row-reverse;
+      background: #eff5f6;
+      border: 1px solid transparent;
+      border-radius: 2px;
+  
+      &:hover,
+      &:focus,
+      &:active,
+      &:focus-visible {
+  
+        border: none;
+        box-shadow: 0;
+        outline: none;
+      }
+    }
+
+
+    
+    .ant-btn .uploadImage {
+      width: 300px;
+    }
+  

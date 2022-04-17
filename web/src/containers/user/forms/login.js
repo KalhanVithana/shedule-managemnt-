@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Checkbox, Button, Row, Col, Input } from "antd";
-import loginImg from "../../../assets/Images/login.png";
+import loginImg from "../../../assets/Images/signin.png";
 import { login } from '../action/loginAction';
 import { useDispatch } from "react-redux";
 export default function Login() {
@@ -56,7 +56,7 @@ const handleChange = (e) => {
               </Row>
 
               <div className="loginSection">
-                <Button className="createBtn" htmlType='submit'>Login</Button>
+                <Button className="loginBtn"  href="/B"htmlType='submit'>Login</Button>
               </div>
               </form>
             </div>

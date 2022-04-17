@@ -1,40 +1,49 @@
-.signUpPageConatiner {
+.registerBillConatiner {
     background-color: #ffffff;
     height: 100vh;
     padding: 40px 95px 90px 95px;
-    .signUpMiddleSection {
+    .registerMiddleSection {
       box-shadow: 0px 2px 12px #00000029;
       border-radius: 50px;
-      .leftSectionLogin {
+     
+      .leftSectionRegister {
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
         background-repeat: no-repeat;
         background-size: cover;
         height: 89vh;
         width: 100%;
       }
       .rightSection {
-        padding: 50px 90px 50px 90px;
-  
+        display: flex;
+        flex-direction: column;
+      
+       justify-content: center;
+        padding: 40px 40px 40px 40px;
         height: 89vh;
         .alreadyText {
           color: $gray1;
           font-size: 15px;
           font-weight: $fontweight5;
-          text-align: right;
+          text-align: left;
+          margin-bottom: 25px;
         }
-        .loginLink {
-          margin-left: 10px;
-          color: $blue1;
-          text-decoration: underline;
-        }
-        .headingCreate {
+     
+        .headingRegisterBill {
+            margin-bottom: 10px;
           font-size: 25px;
           color: $black;
           font-weight: $fontweight7;
         }
         .formSection {
+            .select {
+                width: 100%;
+                
+               
+            }
           .inputFeild {
             width: 100%;
-            height: 50px;
+            height: 40px;
             margin-bottom: 20px;
             margin-top: 0px;
             background: $white;
@@ -52,12 +61,21 @@
             line-height: 19px;
             margin-bottom: 10px;
           }
-          .acceptSection {
+          .uploadImage {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: $gray5;
+            text-align: left;
+              &:focus {
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                box-shadow: none;
+              }
+          }
+          .registerBillSection {
             display: flex;
             flex-direction: row;
             justify-content: center;
             text-align: center;
-            .createBtn {
+            .registerBillBtn {
               background-color: $blue1;
               border-radius: 10px;
               color: $white;
@@ -68,8 +86,9 @@
               margin-top: 20px;
             }
           }
+      
         }
       }
     }
   }
-  
+
