@@ -13,6 +13,7 @@ import SignUp from "../containers/user/forms/SignupPage";
 import Dashboard from "../containers/Dashboard/dashBoard";
 import Complaints from "../containers/Dashboard/Pages/Complaint";
 import { Registerbill } from "../containers/Dashboard/Pages/RegisterBill";
+import { Notification } from "../containers/Dashboard/Pages/Notification";
 // const userAuth = () => {
 //   const isAuth = useSelector((state) => state.loginReducer.auth);
 //   const user = { logged: false };
@@ -38,6 +39,8 @@ export default function AppRoutes() {
          <Route path="/B" element={<Dashboard/>} />
          <Route path="/C" element={<Complaints/>} />
          <Route path="/D" element={<Registerbill/>} />
+         <Route path="/E" element={<Notification/>} />
+
       </Routes>
     </BrowserRouter>
   );
