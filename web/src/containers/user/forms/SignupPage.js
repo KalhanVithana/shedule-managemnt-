@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Checkbox, Button, Row, Col, Input } from "antd";
-import signUpImg from "../../../assets/Images/signup.png";
+import signUpImg from "../../../assets/Images/registration.png";
 import { useDispatch } from "react-redux";
 import { signUp } from "../action/signupAction";
 export default function SignUp() {
