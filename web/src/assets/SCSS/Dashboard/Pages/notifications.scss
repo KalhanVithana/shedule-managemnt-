@@ -1,0 +1,36 @@
+.notificationContainer {
+    background-color: rgb(218, 222, 238);
+    height: 100vh;
+    padding: 40px 90px 40px 290px;
+    .notifications {
+        font-size: 17px;
+        font-weight:  $fontweight9;;
+    }
+    .bellIcon {
+     font-size: 19px;
+    margin-left: 5px;
+       
+    }
+    .notificationMiddleConatainer {
+        background-color: $white;
+      padding: 10px 20px 20px 150px;
+        height: 80vh;
+        width: 100%;
+
+        .pagination {
+           height: 150px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .rightSection {
+           
+            background-repeat: no-repeat;
+            background-size:contain;
+            height: 75vh;
+            width: 100%;
+        }
+    }
+}

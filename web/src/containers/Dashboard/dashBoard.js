@@ -12,7 +12,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../user/forms/login";
 import SignUp from "../user/forms/SignupPage";
 import Complaints from "./Pages/Complaint";
+
 import { Registerbill } from "./Pages/RegisterBill";
+import { Notification } from "./Pages/Notification";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
   const [navigate, setNavigate] = useState("");
@@ -83,7 +85,9 @@ export default function DashBoard() {
       <Layout>
         <Header className="site-layout-sub-header-background" />
 
-        {navigate === "3" ? (
+        {navigate === "2" ? (
+          <Notification />
+        ) :navigate === "3" ? (
           <Complaints />
         ) : navigate === "4" ? (
           <Registerbill />
