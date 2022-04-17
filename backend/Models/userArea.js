@@ -17,6 +17,12 @@ let userArea = new Schema(
     replyMessage: {
       type: String,
     },
+    powerTime: {
+      type: String,
+    },
+    mobile: {
+      type: String,
+    },
 
     customerId: {
       type: String,

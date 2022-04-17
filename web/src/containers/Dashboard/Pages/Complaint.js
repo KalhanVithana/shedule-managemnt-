@@ -1,14 +1,39 @@
-import React from "react";
-import {  Button, Row, Col, Input, Select } from "antd";
+import React, { useState } from "react";
+import { Button, Row, Col, Input, Select } from "antd";
 import complaint from "../../../assets/Images/complaints.svg";
+import { useDispatch } from "react-redux";
+import { complain } from "../action/complainAction";
 
 const { Option } = Select;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
 const { TextArea } = Input;
 export default function Complaints() {
+  const [form, setForm] = useState({
+    area: "",
+    mobile: "",
+    powerTime: "",
+    message: "",
+  });
+
+  const dispatch = useDispatch();
+
+  const Submit = (e) => {
+    e.preventDefault();
+
+    dispatch(complain(form));
+  };
+
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSelectChange = (name, value) => {
+    if (name == "area")
+      setForm((prev) => {
+        return { ...prev, area: value };
+      });
+  };
+
   return (
     <div className="complaintsPageConatiner">
       <div>
@@ -32,19 +57,22 @@ export default function Complaints() {
                 Fill the form with your complaint massages.
               </p>
               <div className="formSection">
-                <form>
+                <form onSubmit={Submit}>
                   <Row gutter={[20, 0]}>
                     <Col xs={24} sm={24} md={24} lg={24} xl={8}>
                       <p className="label">Area</p>
                       <Select
-                       placeholder="Select Area"
+                        placeholder="Select Area"
                         className="select"
-                        onChange={handleChange}
+                        name="area"
+                        onChange={(value) => {
+                          handleSelectChange("area", value);
+                        }}
                       >
                         <Option value="Negambo">Negambo</Option>
                         <Option value="Gampha">Gampha</Option>
                         <Option value="Colombo">Colombo</Option>
-                        <Option value="">Kaluthara</Option>
+                        <Option value="Kaluthara">Kaluthara</Option>
                       </Select>
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={24} xl={8}>
@@ -53,12 +81,18 @@ export default function Complaints() {
                         placeholder="Mobile Number"
                         className="inputFeild email"
                         name="mobile"
+                        onChange={handleChange}
                       />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={24} xl={8}>
-                 <p className="label">Power Cut Time</p>
-                 <Input placeholder="Time" className="inputFeild"  name="Time" />
-               </Col>
+                      <p className="label">Power Cut Time</p>
+                      <Input
+                        placeholder="Time"
+                        className="inputFeild"
+                        name="powerTime"
+                        onChange={handleChange}
+                      />
+                    </Col>
                   </Row>
 
                   <Row gutter={[10, 0]}>
@@ -69,12 +103,14 @@ export default function Complaints() {
                         placeholder="Message"
                         maxLength={6}
                         className="textarea"
+                        name="message"
+                        onChange={handleChange}
                       />
                     </Col>
                   </Row>
 
                   <div className="applySection">
-                    <Button  className="applyBtn">
+                    <Button className="applyBtn" htmlType="submit">
                       Apply
                     </Button>
                   </div>

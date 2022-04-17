@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import {
   UploadOutlined,
@@ -11,8 +11,14 @@ import { Badge, Avatar } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../user/forms/login";
 import SignUp from "../user/forms/SignupPage";
+import Complaints from "./Pages/Complaint";
+import { Registerbill } from "./Pages/RegisterBill";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
+  const [navigate, setNavigate] = useState("");
+
+
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -34,13 +40,19 @@ export default function DashBoard() {
         }}
       >
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          onClick={(e) => {
+            setNavigate(e.key);
+          }}
+        >
           <Menu.Item
             key="1"
             icon={<Avatar size="small" icon={<UserOutlined />} />}
           >
             <span>Profile</span>
-            <Link to="/" />
           </Menu.Item>
 
           <Menu.Item
@@ -52,7 +64,6 @@ export default function DashBoard() {
             }
           >
             Notifications
-            <Link to="/A" />
           </Menu.Item>
 
           <Menu.Item
@@ -60,28 +71,23 @@ export default function DashBoard() {
             icon={<Avatar size="small" icon={<CommentOutlined />} />}
           >
             Complaints
-            <Link to="/C"></Link>
           </Menu.Item>
           <Menu.Item
             key="4"
             icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
           >
             Register Bill
-            <Link to="/D"></Link>
           </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
         <Header className="site-layout-sub-header-background" />
 
-        <Content key="2" style={{ margin: "24px 16px 0" }}>
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 555 }}
-          >
-            content 1
-          </div>
-        </Content>
+        {navigate === "3" ? (
+          <Complaints />
+        ) : navigate === "4" ? (
+          <Registerbill />
+        ) : null}
 
         <Footer style={{ textAlign: "center" }}>
           Ant Design ©2018 Created by Ant UED

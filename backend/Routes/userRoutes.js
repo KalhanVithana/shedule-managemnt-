@@ -134,10 +134,10 @@ router.route("/login").post(async (req, res) => {
 
 router.route("/cm").post(auth, async (req, res) => {
   try {
-    const { area, message } = req.body;
+    const { area,mobile, message,powerTime } = req.body;
     const user = await customer.findById({ _id: req.user });
 
-    if (!area && !message)
+    if (!area && !message && !mobile && !powerTime)
       return res.status(400).json({ msg: `please enter valid details ` });
 
     const date = new Date().toLocaleString("en-US", {
@@ -148,7 +148,9 @@ router.route("/cm").post(auth, async (req, res) => {
 
     let complain = new userArea({
       area,
+      mobile,
       message,
+      powerTime,
       customerId: req.user,
       customerEmail: user.email,
       dateTime: date,
@@ -343,11 +345,16 @@ router.route("/reg/acc").post(auth, async (req, res) => {
 })
 
 
-router.post("/at", upload.single('image'),auth, async (req, res) => {
+router.post("/account", upload.single('images'), async (req, res) => {
   try {
     // Upload image to cloudinary
     const { AreaOffice, accountNo,mobileNo } = req.body;
+    
+
+ 
     const result = await cloudinary.uploader.upload(req.file.path);
+
+  
 
     const checkAcc = await electricityAccount.findOne({ accountNo: accountNo });
  if(checkAcc)   return res.status(400).json({ msg: `already exsist ` });
@@ -363,6 +370,8 @@ router.post("/at", upload.single('image'),auth, async (req, res) => {
     
   let regiserAcc =  await saveAcc.save();
     res.json(regiserAcc);
+
+    
   } catch (err) {
     console.log(err);
   }

@@ -56,7 +56,7 @@ const handleChange = (e) => {
               </Row>
 
               <div className="loginSection">
-                <Button className="loginBtn"  href="/B"htmlType='submit'>Login</Button>
+                <Button className="loginBtn" htmlType='submit'>Login</Button>
               </div>
               </form>
             </div>
