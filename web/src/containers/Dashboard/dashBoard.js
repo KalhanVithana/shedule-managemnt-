@@ -15,12 +15,15 @@ import Complaints from "./Pages/Complaint";
 
 import { Registerbill } from "./Pages/RegisterBill";
 import { Notification } from "./Pages/Notification";
+import { useSelector } from "react-redux";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
+  const userRole = useSelector((state) => state.loginReducer.login_data.user);
   const [navigate, setNavigate] = useState("");
 
 
-
+   
+   
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -83,10 +86,10 @@ export default function DashBoard() {
         </Menu>
       </Sider>
       <Layout>
-        <Header className="site-layout-sub-header-background" />
+       
 
         {navigate === "2" ? (
-          <Notification />
+          <Notification   role={userRole.role}/>
         ) :navigate === "3" ? (
           <Complaints />
         ) : navigate === "4" ? (

@@ -23,8 +23,6 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-
-
 router.route("/register").post(async (req, res) => {
   try {
     const { firstName, lastName, email, password, checkpassword } = req.body;
@@ -134,7 +132,7 @@ router.route("/login").post(async (req, res) => {
 
 router.route("/cm").post(auth, async (req, res) => {
   try {
-    const { area,mobile, message,powerTime } = req.body;
+    const { area, mobile, message, powerTime } = req.body;
     const user = await customer.findById({ _id: req.user });
 
     if (!area && !message && !mobile && !powerTime)
@@ -144,13 +142,14 @@ router.route("/cm").post(auth, async (req, res) => {
       timeZone: "Asia/Colombo",
     });
 
-    console.log(date);
+
 
     let complain = new userArea({
       area,
       mobile,
       message,
       powerTime,
+      customerName:user.firstName,
       customerId: req.user,
       customerEmail: user.email,
       dateTime: date,
@@ -192,9 +191,8 @@ router.route("/area").post(async (req, res) => {
 
 router.route("/area/act").put(async (req, res) => {
   try {
-    const { area, sheduleTime,activeTIme } = req.body;
-  
-   
+    const { area, sheduleTime, activeTIme } = req.body;
+
     if (!area && !sheduleTime)
       return res.status(400).json({ msg: `please enter valid details ` });
 
@@ -212,7 +210,7 @@ router.route("/area/act").put(async (req, res) => {
 
 //customer complain
 
-router.route("/notification").get(auth, async (req, res) => {
+router.route("/notification").get(auth,async(req, res) => {
   try {
     const user = await userArea.findOne({ customerId: req.user });
 
@@ -220,28 +218,27 @@ router.route("/notification").get(auth, async (req, res) => {
 
     if (!user) return res.status(400).json({ msg: `no  request  ` });
 
-    let findrequest = await userArea.findOne({ customerId: req.user });
+    let findrequest = await userArea.find({ customerId: req.user });
 
     console.log(findrequest);
-    return res.json(findrequest);
+    return res.status(200).json(findrequest);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //replay complain
-router.route("/notification").get(auth, async (req, res) => {
+router.route("/notification/admin").get((req, res) => {
   try {
-    const user = await admin.findOne({ adminId: req.user });
+    
 
-    console.log("user", user);
 
-    if (!user) return res.status(400).json({ msg: `no  request  ` });
+     userArea.find((err,data)=>{
+      if(err) console.log(err)
+      else  return res.json(data)
+    });
 
-    let findrequest = await userArea.findOne({ adminId: req.user });
-
-    console.log(findrequest);
-    return res.json(findrequest);
+ 
   } catch (err) {
     res.status(500).json(err);
   }
@@ -268,8 +265,8 @@ router.route("/up/cm").put(auth, async (req, res) => {
   try {
     const { customerEmail, sheduleTime, replyMessage } = req.body;
 
-    if (!sheduleTime && !replyMessage)
-      return res.status(400).json({ msg: `please enter valid details ` });
+    // if (!sheduleTime && !replyMessage)
+    //   return res.status(400).json({ msg: `please enter valid details ` });
 
     const updateComplain = await userArea.findOneAndUpdate(
       { customerEmail: customerEmail },
@@ -285,7 +282,7 @@ router.route("/up/cm").put(auth, async (req, res) => {
 
     var mailOptions = {
       from: "aarav101221@gmail.com",
-      to: "markoliverqueen1@gmail.com",
+      to: customerEmail,
       subject: "Sending Email using Node.js",
       text: "That was easy!",
     };
@@ -300,6 +297,8 @@ router.route("/up/cm").put(auth, async (req, res) => {
 
     res.json(updateComplain);
 
+    console.log(updateComplain)
+
     console.log(req.user);
   } catch (err) {
     res.status(500).json(err);
@@ -308,10 +307,9 @@ router.route("/up/cm").put(auth, async (req, res) => {
 
 //register elect
 
-
 router.route("/reg/acc").post(auth, async (req, res) => {
   try {
-    const { AreaOffice, accountNo,mobileNo,billUpload } = req.body;
+    const { AreaOffice, accountNo, mobileNo, billUpload } = req.body;
     const user = await customer.findById({ _id: req.user });
 
     if (!AreaOffice && !accountNo)
@@ -341,24 +339,18 @@ router.route("/reg/acc").post(auth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
 
-})
-
-
-router.post("/account", upload.single('images'), async (req, res) => {
+router.post("/account", upload.single("images"), async (req, res) => {
   try {
     // Upload image to cloudinary
-    const { AreaOffice, accountNo,mobileNo } = req.body;
-    
+    const { AreaOffice, accountNo, mobileNo } = req.body;
 
- 
     const result = await cloudinary.uploader.upload(req.file.path);
 
-  
-
     const checkAcc = await electricityAccount.findOne({ accountNo: accountNo });
- if(checkAcc)   return res.status(400).json({ msg: `already exsist ` });
-    
+    if (checkAcc) return res.status(400).json({ msg: `already exsist ` });
+
     let saveAcc = new electricityAccount({
       AreaOffice,
       accountNo,
@@ -367,16 +359,12 @@ router.post("/account", upload.single('images'), async (req, res) => {
       avatar: result.secure_url,
       cloudinary_id: result.public_id,
     });
-    
-  let regiserAcc =  await saveAcc.save();
-    res.json(regiserAcc);
 
-    
+    let regiserAcc = await saveAcc.save();
+    res.json(regiserAcc);
   } catch (err) {
     console.log(err);
   }
 });
-
-
 
 module.exports = router;

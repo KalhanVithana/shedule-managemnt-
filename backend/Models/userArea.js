@@ -39,6 +39,9 @@ let userArea = new Schema(
     dateTime: {
         type: String,
       },
+      customerName: {
+        type: String,
+      },
   },
   {
     collection: "userArea",

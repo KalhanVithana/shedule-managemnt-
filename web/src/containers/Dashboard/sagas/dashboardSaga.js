@@ -1,5 +1,5 @@
 import NotificationHelper from "../../../middleware/notification";
-import { ACCOUNT_REGISTER_REQUEST, COMPLAINT_REQUEST } from "../constants";
+import { ACCOUNT_REGISTER_REQUEST, COMPLAINT_REQUEST, NOTIFICATION_REGISTER_REQUEST } from "../constants";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   doComplainError,
@@ -12,6 +12,7 @@ import {
   doRegisterAccountInprograss,
   doRegisterAccountSuccess,
 } from "../action/accountRegisterAction";
+import { donotificationError, donotificationInprograss, donotificationSuccess } from "../action/notificationAction";
 export function* doComplain(data) {
   try {
     yield put(doComplainInprograss());
@@ -38,9 +39,25 @@ export function* doAccountRegister(data) {
   }
 }
 
+
+export function* doNotificationRequest(data) {
+  try {
+  
+    yield put(donotificationInprograss());
+    let resData = yield call(apiHandler.ReplyNotification, data);
+
+    yield put(donotificationSuccess(resData.data));
+    NotificationHelper.getInstance().success(" registerd successfull");
+  } catch (e) {
+    console.log(e.response.data);
+    yield put(donotificationError(e.response.data.msg));
+  }
+}
+
 export function* DashboardSagas() {
   yield* [
     takeEvery(COMPLAINT_REQUEST, doComplain),
     takeEvery(ACCOUNT_REGISTER_REQUEST, doAccountRegister),
+    takeEvery(NOTIFICATION_REGISTER_REQUEST, doNotificationRequest),
   ];
 }

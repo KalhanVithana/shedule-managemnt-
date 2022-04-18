@@ -34,6 +34,11 @@ const apiHandler = {
     let _data = data.payload;
     return axios.post("http://localhost:4000/user/account", _data,{headers:{'x-auth':getToken()}});
   },
+
+  ReplyNotification: (data) => {
+    let _data = data.payload;
+    return axios.put("http://localhost:4000/user/up/cm", _data,{headers:{'x-auth':getToken()}});
+  },
 };
 
 export default apiHandler;
