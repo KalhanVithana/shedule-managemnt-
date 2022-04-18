@@ -16,6 +16,7 @@ import Complaints from "./Pages/Complaint";
 import { Registerbill } from "./Pages/RegisterBill";
 import { Notification } from "./Pages/Notification";
 import { useSelector } from "react-redux";
+import { Dashboard } from "./Pages/dashboard";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
   const userRole = useSelector((state) => state.loginReducer.login_data.user);
@@ -53,15 +54,22 @@ export default function DashBoard() {
             setNavigate(e.key);
           }}
         >
-          <Menu.Item
+              <Menu.Item
             key="1"
+            icon={<Avatar size="small" icon={<UserOutlined />} />}
+          >
+            <span>Dashboard</span>
+          </Menu.Item>
+
+          <Menu.Item
+            key="2"
             icon={<Avatar size="small" icon={<UserOutlined />} />}
           >
             <span>Profile</span>
           </Menu.Item>
 
           <Menu.Item
-            key="2"
+            key="3"
             icon={
               <Badge count={1} overflowCount={10} size="small">
                 <Avatar size="small" icon={<BellOutlined />} />
@@ -72,13 +80,13 @@ export default function DashBoard() {
           </Menu.Item>
 
           <Menu.Item
-            key="3"
+            key="4"
             icon={<Avatar size="small" icon={<CommentOutlined />} />}
           >
             Complaints
           </Menu.Item>
           <Menu.Item
-            key="4"
+            key="5"
             icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
           >
             Register Bill
@@ -88,11 +96,13 @@ export default function DashBoard() {
       <Layout>
        
 
-        {navigate === "2" ? (
-          <Notification   role={userRole.role}/>
+        {navigate === "1" ? (
+          <Dashboard  />
         ) :navigate === "3" ? (
+          <Notification   role={userRole.role}/>
+        ) :navigate === "4" ? (
           <Complaints />
-        ) : navigate === "4" ? (
+        ) : navigate === "5" ? (
           <Registerbill />
         ) : null}
 

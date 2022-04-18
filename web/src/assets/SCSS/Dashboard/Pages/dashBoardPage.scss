@@ -1,0 +1,47 @@
+.dashboardMainConatiner {
+    background-color: rgb(218, 222, 238);
+    height: 100vh;
+    padding: 30px 30px 30px 230px;
+
+    .middleContainer {
+        background-color: rgb(255, 255, 255);
+        height: 92vh;
+        padding: 20px 30px 20px 30px;
+        .cardSection {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            text-align: center;
+            .card {
+                text-align: center;
+                height:50px;
+            }
+        }
+    }
+}
+.view-dash {
+    background-color: red;
+    color: white;
+    height: 40px;
+    width: 100px;
+
+    &:hover,
+    &:focus ,
+    &:active {
+        background-color: red;
+        color: white;
+    }
+}
+.delete-dash {
+    background-color: rgb(0, 0, 255);
+    color: white;
+    height: 40px;
+    width: 100px;
+    
+    &:hover,
+    &:focus ,
+    &:active {
+        background-color:blue;
+        color: white;
+    }
+}
