@@ -19,6 +19,8 @@ import { Notification } from "./Pages/Notification";
 import { useDispatch, useSelector } from "react-redux";
 import { Dashboard } from "./Pages/dashboard";
 import { logoutRequest } from "../user/action/logoutAction";
+import { Customerdashbord } from "./Pages/customerDashbord";
+import { Profile } from "./Pages/Profile";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
   const userRole = useSelector((state) => state.loginReducer.login_data.user);
@@ -61,7 +63,7 @@ export default function DashBoard() {
               <Avatar
                 size="small"
                 icon={<DashboardOutlined />}
-                defaultSelectedKeys={"1"}
+                
               />
             }
           >
@@ -118,7 +120,9 @@ export default function DashBoard() {
       <Layout>
         {console.log(userRole)}
         {navigate === "1" ? (
-          <Dashboard />
+          userRole.role === 'admin' ?  <Dashboard /> : null
+        ): navigate === "2" ? (
+          <Profile role={userRole.role} />
         ) : navigate === "3" ? (
           <Notification role={userRole.role} />
         ) : navigate === "4" ? (
@@ -126,7 +130,7 @@ export default function DashBoard() {
         ) : navigate === "5" ? (
           <Registerbill />
         ) : (
-          <Dashboard />
+         userRole.role === 'admin' ?  <Dashboard /> : <Customerdashbord/>
         )}
 
        

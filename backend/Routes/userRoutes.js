@@ -107,9 +107,8 @@ router.route("/login").post(async (req, res) => {
         },
       });
     } else {
-
       const user = await customer.findOne({ email: email });
-       console.log(user.role)
+      console.log(user.role);
       if (!user) {
         return res.status(400).json({ msg: `No User existing in this email ` });
       }
@@ -119,11 +118,11 @@ router.route("/login").post(async (req, res) => {
       }
 
       const token = jwt.sign({ id: user._id }, "#123");
-    return  res.json({
+      return res.json({
         token,
         user: {
           id: user._id,
-          role: 'customer',
+          role: "customer",
         },
       });
     }
@@ -381,7 +380,6 @@ router.route("/getAll").get(auth, (req, res) => {
   }
 });
 
-
 router.route("/delete/:id").delete(async (req, res) => {
   try {
     const { id } = req.params;
@@ -429,6 +427,51 @@ router.route("/send/notifacation").post(async (req, res) => {
         console.log("Email sent: " + info.response);
       }
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.route("/profile").post(auth, async (req, res) => {
+  try {
+    const { role } = req.body;
+    if (role === "customer") {
+      let user = await customer.findById(req.user);
+
+      res.json(user);
+      console.log(user);
+    } else if (role === "admin") {
+      let user = await admin.findById(req.user);
+
+      res.json(user);
+
+      console.log(user);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.route("/item").put(auth, async (req, res) => {
+  try {
+    const { firstName, lastName, email, role } = req.body;
+
+  
+    if (role === "customer") {
+      let user = await customer.findByIdAndUpdate({_id:req.user}, {
+        $set: req.body,
+      });
+
+      res.json(role);
+      console.log(user);
+    } else if (role === "admin") {
+      let user = await admin.findByIdAndUpdate({_id:req.user}, {
+        $set: req.body,
+      });
+      res.json(user);
+
+      console.log(user);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

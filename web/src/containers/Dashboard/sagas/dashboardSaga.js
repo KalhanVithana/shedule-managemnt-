@@ -19,7 +19,7 @@ export function* doComplain(data) {
     let resData = yield call(apiHandler.UserComplain, data);
 
     yield put(doComplainSuccess(resData.data));
-    NotificationHelper.getInstance().success("complain successfull");
+    NotificationHelper.getInstance().success("complaint successfully send");
   } catch (e) {
     console.log(e.response.data);
     yield put(doComplainError(e.response.data.msg));
@@ -32,7 +32,7 @@ export function* doAccountRegister(data) {
     let resData = yield call(apiHandler.registerAccount, data);
 
     yield put(doRegisterAccountSuccess(resData.data));
-    NotificationHelper.getInstance().success(" registered successfull");
+    NotificationHelper.getInstance().success("Account registered successfully");
   } catch (e) {
     console.log(e.response.data);
     yield put(doRegisterAccountError(e.response.data.msg));
