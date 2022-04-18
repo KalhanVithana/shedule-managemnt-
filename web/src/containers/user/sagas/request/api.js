@@ -5,8 +5,6 @@ export const getAPIkey = (data)=>{
 
 export const getToken = ()=>{ 
   let token= localStorage.getItem('x-auth')
- 
-  console.log("token ",token)
   return token;
  }
  

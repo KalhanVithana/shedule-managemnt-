@@ -5,7 +5,7 @@ import { notificationReducer } from "../containers/Dashboard/reducers/notificati
 import { loginReducer } from "../containers/user/reducers/loginReducer";
 import { signUpReducer } from "../containers/user/reducers/signUpReducer";
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     signUpReducer,
     loginReducer,
     complainReducer,
@@ -13,5 +13,10 @@ const rootReducer = combineReducers({
     notificationReducer
 })
 
+
+const rootReducer = (state,action)=>{
+if(action.type === 'DO_LOGOUT') state = undefined;
+return  appReducer(state,action)
+}
 
 export default rootReducer;

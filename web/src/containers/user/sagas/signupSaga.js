@@ -2,8 +2,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { call, put, takeEvery } from "redux-saga/effects";
 import NotificationHelper from "../../../middleware/notification";
 import { doLoginError, doLoginInprograss, doLoginSuccess } from "../action/loginAction";
+import { doLogoutError, doLogoutSuccess } from "../action/logoutAction";
 import { doSignUpError, doSignUpInprograss, doSignUpSuccess } from "../action/signupAction";
-import { LOGIN_REQUEST, SIGNUP_INPROGRASS, SIGNUP_REQUEST } from "../constants";
+import { LOGIN_REQUEST, LOGOUT_REQUEST, SIGNUP_INPROGRASS, SIGNUP_REQUEST } from "../constants";
 import apiHandler, { getAPIkey } from "./request/api";
 
 export function* doRegister(data) {
@@ -24,12 +25,31 @@ export function* dologin(data) {
     yield put(doLoginInprograss());
     let resData = yield call(apiHandler.loginUser, data);
     getAPIkey(resData.data.token);
+    
+    console.log(resData.data)
     yield put(doLoginSuccess(resData.data))
-    window.location='/B'
     NotificationHelper.getInstance().success("login success");
+    window.location='/dashmenu'
   } catch (e) {
     console.log(e);
+    NotificationHelper.getInstance().error("login error");
     yield put(doLoginError(e));
+  }
+}
+
+export function* dologout(data) {
+  try {
+    
+    yield put(doLoginInprograss());
+    
+    
+    yield put( doLogoutSuccess('logout'))
+    window.location='/'
+    NotificationHelper.getInstance().success("logout success");
+  } catch (e) {
+    console.log(e);
+    NotificationHelper.getInstance().error("login error");
+    yield put(doLogoutError(e));
   }
 }
 
@@ -37,5 +57,6 @@ export function* registerSagas() {
   yield* [
     takeEvery(SIGNUP_REQUEST, doRegister),
     takeEvery(LOGIN_REQUEST, dologin),
+    takeEvery(LOGOUT_REQUEST, dologout),
   ];
 }

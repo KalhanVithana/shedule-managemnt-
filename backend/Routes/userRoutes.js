@@ -107,7 +107,9 @@ router.route("/login").post(async (req, res) => {
         },
       });
     } else {
+
       const user = await customer.findOne({ email: email });
+       console.log(user.role)
       if (!user) {
         return res.status(400).json({ msg: `No User existing in this email ` });
       }
@@ -117,11 +119,11 @@ router.route("/login").post(async (req, res) => {
       }
 
       const token = jwt.sign({ id: user._id }, "#123");
-      res.json({
+    return  res.json({
         token,
         user: {
           id: user._id,
-          role: user.role,
+          role: 'customer',
         },
       });
     }
@@ -142,14 +144,12 @@ router.route("/cm").post(auth, async (req, res) => {
       timeZone: "Asia/Colombo",
     });
 
-
-
     let complain = new userArea({
       area,
       mobile,
       message,
       powerTime,
-      customerName:user.firstName,
+      customerName: user.firstName,
       customerId: req.user,
       customerEmail: user.email,
       dateTime: date,
@@ -210,7 +210,7 @@ router.route("/area/act").put(async (req, res) => {
 
 //customer complain
 
-router.route("/notification").get(auth,async(req, res) => {
+router.route("/notification").get(auth, async (req, res) => {
   try {
     const user = await userArea.findOne({ customerId: req.user });
 
@@ -230,15 +230,10 @@ router.route("/notification").get(auth,async(req, res) => {
 //replay complain
 router.route("/notification/admin").get((req, res) => {
   try {
-    
-
-
-     userArea.find((err,data)=>{
-      if(err) console.log(err)
-      else  return res.json(data)
+    userArea.find((err, data) => {
+      if (err) console.log(err);
+      else return res.json(data);
     });
-
- 
   } catch (err) {
     res.status(500).json(err);
   }
@@ -265,8 +260,8 @@ router.route("/up/cm").put(auth, async (req, res) => {
   try {
     const { customerEmail, sheduleTime, replyMessage } = req.body;
 
-    // if (!sheduleTime && !replyMessage)
-    //   return res.status(400).json({ msg: `please enter valid details ` });
+    if (!sheduleTime && !replyMessage)
+      return res.status(400).json({ msg: `please enter valid details ` });
 
     const updateComplain = await userArea.findOneAndUpdate(
       { customerEmail: customerEmail },
@@ -280,11 +275,13 @@ router.route("/up/cm").put(auth, async (req, res) => {
       { new: true }
     );
 
+    console.log(replyMessage);
+
     var mailOptions = {
       from: "aarav101221@gmail.com",
       to: customerEmail,
-      subject: "Sending Email using Node.js",
-      text: "That was easy!",
+      subject: "dear customer",
+      text: ` new ${replyMessage}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -297,7 +294,7 @@ router.route("/up/cm").put(auth, async (req, res) => {
 
     res.json(updateComplain);
 
-    console.log(updateComplain)
+    console.log(customerEmail);
 
     console.log(req.user);
   } catch (err) {
@@ -341,10 +338,11 @@ router.route("/reg/acc").post(auth, async (req, res) => {
   }
 });
 
-router.post("/account", upload.single("images"), async (req, res) => {
+router.post("/account", upload.single("images"), auth, async (req, res) => {
   try {
     // Upload image to cloudinary
     const { AreaOffice, accountNo, mobileNo } = req.body;
+    const user = await customer.findById({ _id: req.user });
 
     const result = await cloudinary.uploader.upload(req.file.path);
 
@@ -355,6 +353,7 @@ router.post("/account", upload.single("images"), async (req, res) => {
       AreaOffice,
       accountNo,
       mobileNo,
+      customerEmail: user.email,
       customerId: req.user,
       avatar: result.secure_url,
       cloudinary_id: result.public_id,
@@ -362,8 +361,76 @@ router.post("/account", upload.single("images"), async (req, res) => {
 
     let regiserAcc = await saveAcc.save();
     res.json(regiserAcc);
+    console.log(regiserAcc);
   } catch (err) {
     console.log(err);
+  }
+});
+
+router.route("/getAll").get(auth, (req, res) => {
+  try {
+    electricityAccount.find((err, data) => {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(data);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.route("/delete/:id").delete(async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const resData = await electricityAccount.findByIdAndDelete({ _id: id });
+
+    console.log(resData);
+    res.json(resData);
+
+    var mailOptions = {
+      from: "aarav101221@gmail.com",
+      to: customerEmail,
+      subject: "dear customer",
+      text: "Please enter Valid information and Bill ",
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.route("/send/notifacation").post(async (req, res) => {
+  try {
+    const { customerEmail } = req.body;
+
+    console.log("mail", customerEmail);
+    var mailOptions = {
+      from: "aarav101221@gmail.com",
+      to: customerEmail,
+      subject: "dear customer",
+      text: "Please pay your electricity bill ",
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

@@ -15,16 +15,16 @@ import Complaints from "./Pages/Complaint";
 
 import { Registerbill } from "./Pages/RegisterBill";
 import { Notification } from "./Pages/Notification";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dashboard } from "./Pages/dashboard";
+import { logoutRequest } from "../user/action/logoutAction";
 const { Header, Content, Footer, Sider } = Layout;
 export default function DashBoard() {
   const userRole = useSelector((state) => state.loginReducer.login_data.user);
   const [navigate, setNavigate] = useState("");
 
+  const dispatch = useDispatch();
 
-   
-   
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -54,9 +54,15 @@ export default function DashBoard() {
             setNavigate(e.key);
           }}
         >
-              <Menu.Item
+          <Menu.Item
             key="1"
-            icon={<Avatar size="small" icon={<UserOutlined />} />}
+            icon={
+              <Avatar
+                size="small"
+                icon={<UserOutlined />}
+                defaultSelectedKeys={"1"}
+              />
+            }
           >
             <span>Dashboard</span>
           </Menu.Item>
@@ -79,32 +85,48 @@ export default function DashBoard() {
             Notifications
           </Menu.Item>
 
+          {userRole.role === "customer" ? (
+            <>
+              <Menu.Item
+                key="4"
+                icon={<Avatar size="small" icon={<CommentOutlined />} />}
+              >
+                Complaints
+              </Menu.Item>
+              <Menu.Item
+                key="5"
+                icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
+              >
+                Register Bill
+              </Menu.Item>
+            </>
+          ) : null}
+
           <Menu.Item
-            key="4"
-            icon={<Avatar size="small" icon={<CommentOutlined />} />}
-          >
-            Complaints
-          </Menu.Item>
-          <Menu.Item
-            key="5"
             icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
+            onClick={() => {
+              localStorage.setItem("x-auth", "");
+
+              dispatch(logoutRequest("logout"));
+            }}
           >
-            Register Bill
+            log Out
           </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
-       
-
+        {console.log(userRole)}
         {navigate === "1" ? (
-          <Dashboard  />
-        ) :navigate === "3" ? (
-          <Notification   role={userRole.role}/>
-        ) :navigate === "4" ? (
+          <Dashboard />
+        ) : navigate === "3" ? (
+          <Notification role={userRole.role} />
+        ) : navigate === "4" ? (
           <Complaints />
         ) : navigate === "5" ? (
           <Registerbill />
-        ) : null}
+        ) : (
+          <Dashboard />
+        )}
 
         <Footer style={{ textAlign: "center" }}>
           Ant Design ©2018 Created by Ant UED

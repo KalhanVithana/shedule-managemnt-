@@ -101,7 +101,7 @@ export default function Complaints() {
                       <TextArea
                         rows={4}
                         placeholder="Message"
-                        maxLength={6}
+                        maxLength={100}
                         className="textarea"
                         name="message"
                         onChange={handleChange}

@@ -32,7 +32,7 @@ export function* doAccountRegister(data) {
     let resData = yield call(apiHandler.registerAccount, data);
 
     yield put(doRegisterAccountSuccess(resData.data));
-    NotificationHelper.getInstance().success(" registerd successfull");
+    NotificationHelper.getInstance().success(" registered successfull");
   } catch (e) {
     console.log(e.response.data);
     yield put(doRegisterAccountError(e.response.data.msg));
@@ -47,7 +47,7 @@ export function* doNotificationRequest(data) {
     let resData = yield call(apiHandler.ReplyNotification, data);
 
     yield put(donotificationSuccess(resData.data));
-    NotificationHelper.getInstance().success(" registerd successfull");
+    NotificationHelper.getInstance().success(" send successfull");
   } catch (e) {
     console.log(e.response.data);
     yield put(donotificationError(e.response.data.msg));

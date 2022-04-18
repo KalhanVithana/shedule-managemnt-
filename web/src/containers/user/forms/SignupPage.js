@@ -36,7 +36,7 @@ const handleChange = (e) => {
             <div className="rightSection">
               <p className="alreadyText">
                 Already have an account?{" "}
-                <a href="/A" className="loginLink">
+                <a href="/login" className="loginLink">
                   Login
                 </a>
               </p>

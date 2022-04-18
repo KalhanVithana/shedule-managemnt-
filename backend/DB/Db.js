@@ -1,3 +1,3 @@
 module.exports = {
-    db: 'mongodb://localhost:27017/project-3'
+    db: 'mongodb+srv://user1:123@cluster0.ttel9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
   };
