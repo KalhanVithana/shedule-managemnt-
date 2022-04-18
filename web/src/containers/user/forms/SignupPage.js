@@ -76,7 +76,7 @@ const handleChange = (e) => {
                 </Row>
 
                 <div className="acceptSection">
-                  <Button className="createBtn" htmlType="submit">Create Account</Button>
+                  <Button href="/F" className="createBtn" htmlType="submit">Create Account</Button>
                 </div>
                 
               </div>

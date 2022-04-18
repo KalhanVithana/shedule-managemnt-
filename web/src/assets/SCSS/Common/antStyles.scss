@@ -49,13 +49,17 @@
         border-color: none;
         box-shadow: none;
       }
+      .ant-select-focused {
+        border-color: none;
+        box-shadow: 0;
+      }
   
     }
     .ant-select-selector {
       display: flex;
       flex-direction: row-reverse;
       background: #eff5f6;
-      border: 1px solid transparent;
+      border: none;
       border-radius: 2px;
   
       &:hover,
@@ -68,6 +72,11 @@
         outline: none;
       }
     }
+    .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+       border-color: none; 
+      border-right-width: 0px;
+      box-shadow: 0;
+  }
 
 
     
@@ -75,3 +84,16 @@
       width: 300px;
     }
   
+ .dashboardModal {
+   .ant-modal-body {
+     display: flex;
+
+     .dashBoard-img {
+       height:250px;
+       width: 100%;
+     }
+   }
+   .ant-modal-footer {
+     display: none;
+   }
+ }

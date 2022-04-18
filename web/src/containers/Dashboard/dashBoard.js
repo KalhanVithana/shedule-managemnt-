@@ -6,6 +6,7 @@ import {
   BellOutlined,
   CommentOutlined,
   ScheduleOutlined,
+  DashboardOutlined
 } from "@ant-design/icons";
 import { Badge, Avatar } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -59,7 +60,7 @@ export default function DashBoard() {
             icon={
               <Avatar
                 size="small"
-                icon={<UserOutlined />}
+                icon={<DashboardOutlined />}
                 defaultSelectedKeys={"1"}
               />
             }
@@ -128,9 +129,7 @@ export default function DashBoard() {
           <Dashboard />
         )}
 
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+       
       </Layout>
     </Layout>
   );
