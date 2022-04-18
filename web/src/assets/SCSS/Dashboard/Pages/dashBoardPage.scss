@@ -7,20 +7,22 @@
         background-color: rgb(255, 255, 255);
         height: 92vh;
         padding: 20px 30px 20px 30px;
+        overflow-y: auto;
         .cardSection {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            text-align: center;
-            .card {
-                text-align: center;
-                height:50px;
-            }
+        height: 350px;
+         background-repeat: no-repeat;
+         background-size:contain;
+   display: flex;
+   flex-direction: row;
+        
+        }
+        .table {
+            
         }
     }
 }
 .view-dash {
-    background-color: red;
+    background-color: $blue1;
     color: white;
     height: 40px;
     width: 100px;
@@ -28,12 +30,12 @@
     &:hover,
     &:focus ,
     &:active {
-        background-color: red;
+        background-color:$blue1;
         color: white;
     }
 }
 .delete-dash {
-    background-color: rgb(0, 0, 255);
+    background-color:$gray5;
     color: white;
     height: 40px;
     width: 100px;
@@ -41,7 +43,7 @@
     &:hover,
     &:focus ,
     &:active {
-        background-color:blue;
+        background-color:$gray5;
         color: white;
     }
 }

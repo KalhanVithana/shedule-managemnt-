@@ -14,7 +14,8 @@ import Dashboard from "../containers/Dashboard/dashBoard";
 import Complaints from "../containers/Dashboard/Pages/Complaint";
 import { Registerbill } from "../containers/Dashboard/Pages/RegisterBill";
 import { Notification } from "../containers/Dashboard/Pages/Notification";
-const userAuth = () => {
+import { Customerdashbord } from "../containers/Dashboard/Pages/customerDashbord";
+const UserAuth = () => {
   const isAuth = useSelector((state) => state.loginReducer.auth);
 
 
@@ -22,7 +23,7 @@ const userAuth = () => {
 };
 
 export const AuthRoute = () => {
-  const isAuth = userAuth();
+  const isAuth = UserAuth();
   return isAuth ? <Outlet /> : <Navigate to="/" />;
 };
 
@@ -39,6 +40,7 @@ export default function AppRoutes() {
          <Route path="/C" element={<Complaints/>} />
          <Route path="/D" element={<Registerbill/>} />
          <Route path="/E" element={<Notification/>} />
+         <Route path="/F" element={<Customerdashbord/>} />
         </Route>
         
 

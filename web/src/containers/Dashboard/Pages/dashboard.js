@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Card, Table, Tag, Space, Modal, notification } from "antd";
 import axios from "axios";
 import NotificationHelper from "../../../middleware/notification";
-
+import dash1 from "../../../assets/Images/dashbord6.png";
+import dashnew2 from "../../../assets/Images/dashbored3.png";
+import dash3 from "../../../assets/Images/dashbord4.png";
 export function Dashboard() {
   const [apiData, setData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -134,30 +136,44 @@ export function Dashboard() {
   return (
     <div className="dashboardMainConatiner">
       <Modal
+      wrapClassName="dashboardModal"
         title="Basic Modal"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <div>
-          <img src={image} alt="new" width={200} height={200} />
+          <img src={image} alt="new" className="dashBoard-img" />
           <h5>bill</h5>
         </div>
       </Modal>
       <div className="middleContainer">
         <h2>Dashboard</h2>
-        <Row gutter={16}>
-          <div className="cardSection"></div>
-          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
-            <Card className="card" bordered={true}>
-              A
-            </Card>
+        <Row gutter={[60, 20]}>
+          <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+            <div
+              className="cardSection"
+              style={{
+                backgroundImage: `url(${dash1})`,
+              }}
+            ></div>
           </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
-            <Card bordered={true}>B</Card>
+
+          <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+            <div
+              className="cardSection"
+              style={{
+                backgroundImage: `url(${dash3})`,
+              }}
+            ></div>
           </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
-            <Card bordered={true}>C</Card>
+          <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+            <div
+              className="cardSection"
+              style={{
+                backgroundImage: `url(${dashnew2})`,
+              }}
+            ></div>
           </Col>
         </Row>
         <Row>
