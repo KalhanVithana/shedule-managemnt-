@@ -19,7 +19,15 @@
         .listSection {
           
             .list {
-                margin-top: 40px;
+                margin-top: 0px;
+            }
+            .backBtn {
+                background-color: $blue1;
+                color: $white;
+                height: 40px;
+                width: 200px;
+                margin-top: 190px;
+             
             }
         }
     

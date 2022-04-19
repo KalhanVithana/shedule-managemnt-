@@ -61,7 +61,7 @@ export function Notification({ role }) {
         <div>
           {role === "admin" ? (
             <>
-              <label for="fname">reply</label>
+
 
               <TextArea
                 rows={4}

@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Avatar, Row, Col } from "antd";
+import { List, Avatar, Row, Col, Button } from "antd";
 import nonPayment from "../../../assets/Images/payments.png";
 
 
@@ -45,6 +45,7 @@ export function Nonpayments() {
             </List.Item>
           )}
         />
+        <Button href="/dashmenu" className="backBtn">Back</Button>
           </Col>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
           <div
