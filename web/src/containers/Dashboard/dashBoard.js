@@ -6,7 +6,8 @@ import {
   BellOutlined,
   CommentOutlined,
   ScheduleOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import { Badge, Avatar } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -107,7 +108,7 @@ export default function DashBoard() {
           ) : null}
 
           <Menu.Item
-            icon={<Avatar className="logoutBackground backGround"  size="medium" icon={<ScheduleOutlined  className="Icon"/>} />}
+            icon={<Avatar className="logoutBackground backGround"  size="medium" icon={<LogoutOutlined  className="Icon"/>} />}
             onClick={() => {
               localStorage.setItem("x-auth", "");
 
