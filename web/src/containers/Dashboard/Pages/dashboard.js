@@ -10,7 +10,7 @@ export function Dashboard() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [image, setImage] = useState("");
 
-  const data = [{acc:"4558"}]
+  const data = [{acc:"25369854"}]
   const showModal = () => {
     setIsModalVisible(true);
   };

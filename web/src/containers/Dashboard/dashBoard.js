@@ -57,7 +57,7 @@ export default function DashBoard() {
             setNavigate(e.key);
           }}
         >
-          {userRole.role ==-'admin' ?  <Menu.Item
+          {userRole.role ==='admin' ?  <Menu.Item
             key="1"
             icon={
               <Avatar
