@@ -136,7 +136,7 @@ export function Notification({ role }) {
                 )}
                 pagination={{
                   className:"paginationNew",
-                  pageSize: sendReply ? 2 : 2,
+                  pageSize: sendReply ? 5 : 5,
                 }}
               />
             </Col>

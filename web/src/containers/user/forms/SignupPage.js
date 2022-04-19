@@ -50,7 +50,7 @@ const handleChange = (e) => {
                   </Col>
                   <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                     <p className="label"> Last Name</p>
-                    <Input placeholder="Last Name" className="inputFeild" name="lastName" onChange={handleChange} />
+                    <Input plaaceholder="Last Name" className="inputFeild" name="lastName" onChange={handleChange} />
                   </Col>
                 </Row>
                 <Row>
@@ -76,7 +76,7 @@ const handleChange = (e) => {
                 </Row>
 
                 <div className="acceptSection">
-                  <Button href="/F" className="createBtn" htmlType="submit">Create Account</Button>
+                  <Button  className="createBtn" htmlType="submit">Create Account</Button>
                 </div>
                 
               </div>

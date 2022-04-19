@@ -14,7 +14,7 @@ export function* doRegister(data) {
      yield put(doSignUpSuccess(resData.data))
     NotificationHelper.getInstance().success("signUp success");
   } catch (e) {
-    console.log(e);
+    NotificationHelper.getInstance().error(e.response.data.msg);
     yield put(doSignUpError(e));
   }
 }
@@ -31,8 +31,8 @@ export function* dologin(data) {
     NotificationHelper.getInstance().success("login success");
     window.location='/dashmenu'
   } catch (e) {
-    console.log(e);
-    NotificationHelper.getInstance().error("login error");
+   
+    NotificationHelper.getInstance().error(e.response.data.msg);
     yield put(doLoginError(e));
   }
 }

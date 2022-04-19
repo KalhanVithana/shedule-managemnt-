@@ -54,6 +54,7 @@ export function Profile({ role }) {
   return (
     <>
       <div style={{ alignContent: "center", justifyContent: "center" }}>
+      {role ==='admin'?'':''}
         <Card
           style={{ width: "30rem", marginLeft: "30rem", marginTop: "10rem" }}
         >
