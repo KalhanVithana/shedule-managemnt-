@@ -15,7 +15,7 @@ import Complaints from "../containers/Dashboard/Pages/Complaint";
 import { Registerbill } from "../containers/Dashboard/Pages/RegisterBill";
 import { Notification } from "../containers/Dashboard/Pages/Notification";
 import { Customerdashbord } from "../containers/Dashboard/Pages/customerDashbord";
-import { Nonpayments } from "../assets/SCSS/Dashboard/Pages/nonPayments";
+import { Nonpayments } from "../containers/Dashboard/Pages/nonPayments";
 const UserAuth = () => {
   const isAuth = useSelector((state) => state.loginReducer.auth);
 

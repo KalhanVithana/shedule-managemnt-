@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Avatar, Row, Col } from "antd";
-import nonPayment from "../../../Images/payments.png";
+import nonPayment from "../../../assets/Images/payments.png";
 
 
 const count = 3;

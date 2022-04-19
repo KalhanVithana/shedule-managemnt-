@@ -11,3 +11,43 @@
   .site-layout-background {
     background: #fff;
   }
+
+  .dashboardBackground {
+    background-color: rgb(68, 0, 255);
+  
+
+  
+  
+  }
+
+  .customerBackground {
+    background-color: rgb(31, 138, 31);
+
+  }
+  .notificationBackground  {
+    background-color: rgb(234, 43, 43);
+  }
+
+  .complaintsBackground {
+background-color: rgb(255, 0, 251);
+  }
+  .registerBackground {
+    background-color: rgb(129, 111, 122);
+  }
+  .logoutBackground {
+    background-color: rgb(242, 144, 15);
+  }
+  .backGround {
+    color: rgb(240, 240, 247);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .Icon {
+      font-size: 18px;
+      
+    }
+  }
+  .badge {
+    margin-top: 8px;
+  }
+ 

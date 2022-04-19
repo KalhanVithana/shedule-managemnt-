@@ -128,5 +128,25 @@ height: max-content;
     display: none;
   }
  }
+dashb {
+ fill: blue;
+}
+.ant-form-item-required {
+text-align: left;
+}
+
+.ant-input  {
+ &:focus,
+ &:hover,
+ &:active {
+    box-shadow: none;
+      border-color: 1px solid gray;
+
+ }
+     
+    
+}
+
+
 
 
