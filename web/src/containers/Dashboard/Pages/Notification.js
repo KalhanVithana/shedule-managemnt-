@@ -41,7 +41,6 @@ export function Notification({ role }) {
             headers: { "x-auth": token },
           })
         : null;
-      
 
     setNotifications(resData.data);
   };
@@ -49,7 +48,8 @@ export function Notification({ role }) {
   return (
     <div>
       <Modal
-        title="Basic Modal"
+        wrapClassName="replymodal"
+        title="Reply"
         visible={sendReply}
         onOk={() => {
           setsendReply(!sendReply);
@@ -74,13 +74,14 @@ export function Notification({ role }) {
                   setreplyMessage(e.target.value);
                 }}
               />
-              <button
+              <Button
+                className="sendBtn"
                 onClick={() => {
                   handleSubmit(itemEmail);
                 }}
               >
                 send
-              </button>
+              </Button>
             </>
           ) : (
             <TextArea
@@ -90,9 +91,9 @@ export function Notification({ role }) {
               className="textarea"
               name="message"
               defaultValue={replyResponse}
-              
             />
           )}
+      
         </div>
       </Modal>
 
@@ -119,7 +120,7 @@ export function Notification({ role }) {
                             onClick={(e) => {
                               setsendReply(!sendReply);
                               setItemEmail(item.customerEmail);
-                              setreplyResponse(item.replyMessage)
+                              setreplyResponse(item.replyMessage);
                             }}
                           >
                             {role === "admin" ? " Reply to" : "answer"}
@@ -134,6 +135,7 @@ export function Notification({ role }) {
                   </li>
                 )}
                 pagination={{
+                  className:"paginationNew",
                   pageSize: sendReply ? 2 : 2,
                 }}
               />

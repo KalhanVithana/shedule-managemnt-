@@ -137,18 +137,23 @@ export function Dashboard() {
     <div className="dashboardMainConatiner">
       <Modal
       wrapClassName="dashboardModal"
-        title="Basic Modal"
+        title="Bill View"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div>
+        <div className="billContainer">
+        <p className="billText">Bill View</p>
           <img src={image} alt="new" className="dashBoard-img" />
-          <h5>bill</h5>
+          
         </div>
       </Modal>
       <div className="middleContainer">
+        <div className="dashbord-links">
         <h2>Dashboard</h2>
+        <a className="nonPayment-link" href="/G"> Bill Non Payment List</a>
+        </div>
+      
         <Row gutter={[60, 20]}>
           <Col xs={24} sm={24} md={24} lg={12} xl={8}>
             <div

@@ -86,14 +86,47 @@
   
  .dashboardModal {
    .ant-modal-body {
-     display: flex;
-
+     .billContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
      .dashBoard-img {
-       height:250px;
-       width: 100%;
+       height:400px;
+       width: 400px;
+      
+     
      }
+     .billText {
+       font-size: 20px;
+       text-align: center;
+       font-weight: $fontweight9;
+     }
+    }
    }
    .ant-modal-footer {
      display: none;
    }
  }
+
+ .replymodal {
+   
+  .ant-modal-body {
+height: max-content;
+
+    .sendBtn {
+      background-color: $blue1;
+      color: white;
+      margin-top: 10px;
+      margin-left: 90px;
+      margin-right: 90px;
+     
+    }
+
+  }
+  .ant-modal-footer {
+    display: none;
+  }
+ }
+
+

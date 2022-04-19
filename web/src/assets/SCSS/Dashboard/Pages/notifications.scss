@@ -13,17 +13,17 @@
     }
     .notificationMiddleConatainer {
         background-color: $white;
-      padding: 10px 20px 20px 150px;
+      padding: 20px 20px 20px 30px;
         height: 80vh;
         width: 100%;
 
-        .pagination {
-           height: 150px;
+        .paginationNew {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-end;
-        }
+           align-items: flex-end;
+            justify-content: flex-end;
+            height: 300px;
+            margin-bottom: 20px;
+          }
 
         .rightSection {
            
