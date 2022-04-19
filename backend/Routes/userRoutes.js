@@ -257,13 +257,14 @@ router.route("/cmr").get(auth, async (req, res) => {
 
 router.route("/up/cm").put(auth, async (req, res) => {
   try {
-    const { customerEmail, sheduleTime, replyMessage } = req.body;
+    const { id, sheduleTime, replyMessage, customerEmail } = req.body;
+    console.log(id);
 
     if (!sheduleTime && !replyMessage)
       return res.status(400).json({ msg: `please enter valid details ` });
 
-    const updateComplain = await userArea.findOneAndUpdate(
-      { customerEmail: customerEmail },
+    const updateData = await userArea.findByIdAndUpdate(
+      { _id: id },
       {
         $set: {
           sheduleTime: sheduleTime,
@@ -274,13 +275,13 @@ router.route("/up/cm").put(auth, async (req, res) => {
       { new: true }
     );
 
-    console.log(replyMessage);
+    console.log(customerEmail);
 
-    var mailOptions = {
+    let mailOptions = {
       from: "aarav101221@gmail.com",
       to: customerEmail,
-      subject: "dear customer",
-      text: ` new ${replyMessage}`,
+      subject: "power recover time",
+      text: `  ${replyMessage}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -291,13 +292,9 @@ router.route("/up/cm").put(auth, async (req, res) => {
       }
     });
 
-    res.json(updateComplain);
-
-    console.log(customerEmail);
-
-    console.log(req.user);
+    return await res.send(updateData);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
@@ -456,18 +453,23 @@ router.route("/item").put(auth, async (req, res) => {
   try {
     const { firstName, lastName, email, role } = req.body;
 
-  
     if (role === "customer") {
-      let user = await customer.findByIdAndUpdate({_id:req.user}, {
-        $set: req.body,
-      });
+      let user = await customer.findByIdAndUpdate(
+        { _id: req.user },
+        {
+          $set: req.body,
+        }
+      );
 
       res.json(role);
       console.log(user);
     } else if (role === "admin") {
-      let user = await admin.findByIdAndUpdate({_id:req.user}, {
-        $set: req.body,
-      });
+      let user = await admin.findByIdAndUpdate(
+        { _id: req.user },
+        {
+          $set: req.body,
+        }
+      );
       res.json(user);
 
       console.log(user);

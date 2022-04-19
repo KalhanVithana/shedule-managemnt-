@@ -13,6 +13,7 @@ export function Notification({ role }) {
   const [sendReply, setsendReply] = useState(false);
   const [replyMessage, setreplyMessage] = useState("");
   const [itemEmail, setItemEmail] = useState("");
+  const [itemId, setItemId] = useState("");
   const [replyResponse, setreplyResponse] = useState("");
   const dispatch = useDispatch();
   const tempArr = [];
@@ -24,7 +25,7 @@ export function Notification({ role }) {
   const handleSubmit = (email) => {
     console.log(replyMessage, email);
 
-    const form = { customerEmail: email, replyMessage: replyMessage };
+    const form = { customerEmail: email, replyMessage: replyMessage,id:itemId };
     dispatch(notification(form));
   };
 
@@ -69,9 +70,11 @@ export function Notification({ role }) {
                 maxLength={100}
                 className="textarea"
                 name="message"
-                value={replyMessage}
+                value={replyResponse ? replyResponse :replyMessage}
+               
                 onChange={(e) => {
                   setreplyMessage(e.target.value);
+                  setreplyResponse("")
                 }}
               />
               <Button
@@ -90,9 +93,11 @@ export function Notification({ role }) {
               maxLength={100}
               className="textarea"
               name="message"
-              defaultValue={replyResponse}
+              value={replyResponse}
+             
             />
           )}
+         
       
         </div>
       </Modal>
@@ -121,6 +126,7 @@ export function Notification({ role }) {
                               setsendReply(!sendReply);
                               setItemEmail(item.customerEmail);
                               setreplyResponse(item.replyMessage);
+                              setItemId(item._id)
                             }}
                           >
                             {role === "admin" ? " Reply to" : "answer"}
@@ -135,8 +141,7 @@ export function Notification({ role }) {
                   </li>
                 )}
                 pagination={{
-                  className:"paginationNew",
-                  pageSize: sendReply ? 5 : 5,
+                  pageSize: sendReply ? 4 : 4,
                 }}
               />
             </Col>
