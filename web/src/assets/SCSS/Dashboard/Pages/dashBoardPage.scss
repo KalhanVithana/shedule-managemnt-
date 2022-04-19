@@ -8,6 +8,17 @@
         height: 92vh;
         padding: 20px 30px 20px 30px;
         overflow-y: auto;
+
+        .dashbord-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .nonPayment-link {
+                font-size: 14px;
+                font-weight: $fontweight9;
+            }
+        }
         .cardSection {
         height: 350px;
          background-repeat: no-repeat;

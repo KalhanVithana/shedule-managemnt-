@@ -1,0 +1,27 @@
+.nonPaymentsMainConatiner {
+    background-color: rgb(218, 222, 238);
+    height: 100vh;
+    padding: 30px 30px 30px 30px;
+
+    .middleContainer {
+        background-color: rgb(255, 255, 255);
+        height: 92vh;
+        padding: 20px 30px 20px 30px;
+        overflow-y: auto;
+
+        .cardSection {
+           
+            height: 80vh;
+            width: 100%;
+            background-repeat: no-repeat;
+         background-size:contain;
+        }
+        .listSection {
+          
+            .list {
+                margin-top: 40px;
+            }
+        }
+    
+    }
+}
