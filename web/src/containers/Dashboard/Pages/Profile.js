@@ -67,7 +67,7 @@ export function Profile({ role }) {
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
          
       <div className="formSection">
-      <h1 className="profileDetails">Customer profile Details</h1>
+      <h1 className="profileDetails">User Profile</h1>
       <Form
       className="form"
             name="basic"
@@ -110,13 +110,7 @@ export function Profile({ role }) {
               <Input />
             </Form.Item>
 
-            <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{ offset: 8, span: 16 }}
-            >
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+           
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button className="updateBtn" htmlType="submit">

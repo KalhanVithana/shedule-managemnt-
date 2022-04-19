@@ -57,7 +57,7 @@ export default function DashBoard() {
             setNavigate(e.key);
           }}
         >
-          <Menu.Item
+          {userRole.role ==-'admin' ?  <Menu.Item
             key="1"
             icon={
               <Avatar
@@ -69,7 +69,7 @@ export default function DashBoard() {
             }
           >
             <span>Dashboard</span>
-          </Menu.Item>
+          </Menu.Item> :null}
 
           <Menu.Item
             key="2"
@@ -131,7 +131,7 @@ export default function DashBoard() {
         ) : navigate === "5" ? (
           <Registerbill />
         ) : (
-         userRole.role === 'admin' ?  <Dashboard /> : <Customerdashbord/>
+         userRole.role === 'admin' ?  <Dashboard /> : <Profile role={userRole.role}/>
         )}
 
        
