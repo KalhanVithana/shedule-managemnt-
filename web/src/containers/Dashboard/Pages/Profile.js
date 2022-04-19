@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox, Card, notification } from "antd";
 import axios from "axios";
 import NotificationHelper from "../../../middleware/notification";
+import { Row, Col } from "antd";
+import { Adminprofile } from "./adminProfile";
+import { Customerprofile } from "./customerProfile";
 export function Profile({ role }) {
   const [userData, setUserData] = useState([]);
   const [form] = Form.useForm();
@@ -52,13 +55,21 @@ export function Profile({ role }) {
   }, []);
 
   return (
-    <>
-      <div style={{ alignContent: "center", justifyContent: "center" }}>
-      {role ==='admin'?'':''}
-        <Card
-          style={{ width: "30rem", marginLeft: "30rem", marginTop: "10rem" }}
-        >
-          <Form
+    <div className="profileMainContainer">
+     
+        <Row>
+          
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+          {role ==='admin'?<Adminprofile/>:<Customerprofile/>} 
+
+
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+         
+      <div className="formSection">
+      <h1 className="profileDetails">Customer profile Details</h1>
+      <Form
+      className="form"
             name="basic"
             form={form}
             labelCol={{ span: 8 }}
@@ -88,6 +99,8 @@ export function Profile({ role }) {
             </Form.Item>
 
             <Form.Item
+            
+            className="email"
               label="email"
               name="email"
               rules={[
@@ -106,13 +119,20 @@ export function Profile({ role }) {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button type="primary" htmlType="submit">
+              <Button className="updateBtn" htmlType="submit">
                 update
               </Button>
             </Form.Item>
           </Form>
-        </Card>
+
       </div>
-    </>
+        
+       
+          </Col>
+
+        </Row>
+       
+      </div>
+  
   );
 }

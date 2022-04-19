@@ -61,8 +61,9 @@ export default function DashBoard() {
             key="1"
             icon={
               <Avatar
-                size="small"
-                icon={<DashboardOutlined />}
+              className="dashboardBackground backGround"
+                size="medium"
+                icon={<DashboardOutlined className="Icon" />}
                 
               />
             }
@@ -72,7 +73,7 @@ export default function DashBoard() {
 
           <Menu.Item
             key="2"
-            icon={<Avatar size="small" icon={<UserOutlined />} />}
+            icon={<Avatar  className="customerBackground backGround"  size="medium" icon={<UserOutlined className="Icon" />} />}
           >
             <span>Profile</span>
           </Menu.Item>
@@ -80,8 +81,8 @@ export default function DashBoard() {
           <Menu.Item
             key="3"
             icon={
-              <Badge count={1} overflowCount={10} size="small">
-                <Avatar size="small" icon={<BellOutlined />} />
+              <Badge count={1} overflowCount={10} size="small" className="badge">
+                <Avatar  className="notificationBackground backGround" size="medium" icon={<BellOutlined className="Icon" />} />
               </Badge>
             }
           >
@@ -92,13 +93,13 @@ export default function DashBoard() {
             <>
               <Menu.Item
                 key="4"
-                icon={<Avatar size="small" icon={<CommentOutlined />} />}
+                icon={<Avatar  className="complaintsBackground backGround" size="medium" icon={<CommentOutlined className="Icon" />} />}
               >
                 Complaints
               </Menu.Item>
               <Menu.Item
                 key="5"
-                icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
+                icon={<Avatar  className="registerBackground backGround"  size="medium" icon={<ScheduleOutlined className="Icon" />} />}
               >
                 Register Bill
               </Menu.Item>
@@ -106,14 +107,14 @@ export default function DashBoard() {
           ) : null}
 
           <Menu.Item
-            icon={<Avatar size="small" icon={<ScheduleOutlined />} />}
+            icon={<Avatar className="logoutBackground backGround"  size="medium" icon={<ScheduleOutlined  className="Icon"/>} />}
             onClick={() => {
               localStorage.setItem("x-auth", "");
 
               dispatch(logoutRequest("logout"));
             }}
           >
-            log Out
+            Log Out
           </Menu.Item>
         </Menu>
       </Sider>
